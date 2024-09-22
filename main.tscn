@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://diy1j6ijmpsnp"]
+
+[ext_resource type="Script" path="res://gd/http_manager.gd" id="1_3tdyl"]
+[ext_resource type="Script" path="res://gd/http_client.gd" id="2_v876h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bgw7j"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_om3mr"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="Skin" id="Skin_ddf16"]
+
+[node name="Main" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_bgw7j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_om3mr")
+skin = SubResource("Skin_ddf16")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 20, 35)
+
+[node name="HTTPManager" type="Node" parent="."]
+script = ExtResource("1_3tdyl")
+
+[node name="SSEClient" type="Node" parent="HTTPManager"]
+
+[node name="HTTPClient" type="HTTPRequest" parent="HTTPManager"]
+script = ExtResource("2_v876h")
